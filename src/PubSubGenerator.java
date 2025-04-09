@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,19 +11,16 @@ public class PubSubGenerator {
     private static final List<String> CITIES = Arrays.asList("Bucuresti", "Cluj", "Timisoara", "Iasi", "Constanta");
 
     public static void main(String[] args) throws InterruptedException, ExecutionException, IOException {
-        int numPublications = 100000;
-        int numSubscriptions = 100000;
+        // Load config from JSON
+        Config config = new Config("config.json");
 
-        int numThreads = 8;
+        int numThreads = config.numThreads;
+        int numPublications = config.numPublications;
+        int numSubscriptions = config.numSubscriptions;
+        int equalityRatio = config.equalityRatio;
+        Map<String, Integer> fieldFrequencies = config.fieldFrequencies;
+
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
-
-        Map<String, Integer> fieldFrequencies = new LinkedHashMap<>();
-        fieldFrequencies.put("city", 90);
-        fieldFrequencies.put("temp", 70);
-        fieldFrequencies.put("wind", 30);
-        fieldFrequencies.put("date", 30);
-
-        int equalityRatio = 70;
 
         long startTime = System.currentTimeMillis();
 

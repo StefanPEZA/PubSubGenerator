@@ -1,0 +1,12 @@
+{
+  "numThreads": 8,
+  "numPublications": 100000,
+  "numSubscriptions": 100000,
+  "equalityRatio": 70,
+  "fieldFrequencies": {
+    "city": 90,
+    "temp": 70,
+    "wind": 30,
+    "date": 30
+  }
+}
